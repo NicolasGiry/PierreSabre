@@ -18,6 +18,10 @@ public class Humain {
 		return argent;
 	}
 	
+	public void setArgent(int argent) {
+		this.argent = argent;
+	}
+	
 	public void parler(String texte) {
 		System.out.println("("+nom+") - " + texte);
 	}
