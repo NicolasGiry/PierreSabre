@@ -23,6 +23,10 @@ public class Humain {
 		return argent;
 	}
 	
+	public Humain[] getConnaissance() {
+		return connaissance;
+	}
+	
 	public void setArgent(int argent) {
 		this.argent = argent;
 	}
