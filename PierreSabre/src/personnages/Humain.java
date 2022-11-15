@@ -1,9 +1,14 @@
 package personnages;
 
 public class Humain {
+	
+	final int MAXCONNAISSANCE = 30;
 	private String nom;
 	private String boisson;
 	private int argent;
+	protected int nbConnaissance = 0;
+	private Humain[] connaissance = new Humain[MAXCONNAISSANCE];
+	
 	
 	public Humain(String nom, String boisson, int argent) {
 		this.nom = nom;
@@ -49,5 +54,40 @@ public class Humain {
 	
 	public void perdreArgent(int perte) {
 		argent -= perte;
+	}
+	
+	public void faireConnaissanceAvec(Humain autreHumain) {
+		direBonjour();
+		autreHumain.repondre(this);
+		memoriser(autreHumain);
+	}
+	
+	private void memoriser(Humain humain) {
+		if (nbConnaissance < MAXCONNAISSANCE) {
+			connaissance[nbConnaissance] = humain;
+			nbConnaissance ++;
+		} else {
+			for(int i=0; i<MAXCONNAISSANCE-1; i++) {
+				connaissance[i]=connaissance[i+1];
+			}
+			connaissance[MAXCONNAISSANCE-1] = humain;
+		}
+	}
+	
+	private void repondre(Humain humain) {
+		direBonjour();
+		memoriser(humain);
+	}
+	
+	public void listerConnaissance() {
+		String texte;
+		if (nbConnaissance>0) {
+			texte = "Je connais beaucoup de monde dont : ";
+			for (int i=0; i<nbConnaissance-1;i++) {
+				texte += connaissance[i].getNom()+", ";
+			}texte += connaissance[nbConnaissance-1].getNom();
+			parler(texte);
+		}
+		
 	}
 }
